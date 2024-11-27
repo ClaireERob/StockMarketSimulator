@@ -1,1 +1,253 @@
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Creating the 18 sample stockList
+
+
+        Stock moderna = new Stock("Moderna", 207.89, "Healthcare");
+        Stock pfizer = new Stock("Pfizer", 42.84, "Healthcare");
+        Stock astrazeneca = new Stock("AstraZeneca", 74.57, "Healthcare");
+        Stock walmart = new Stock("Walmart", 168.32, "Retail");
+        Stock amazon = new Stock("Amazon", 134.56, "Retail");
+        Stock costco = new Stock("Costco", 563.87, "Retail");
+        Stock microsoft = new Stock("Microsoft", 318.75, "Technology");
+        Stock google = new Stock("Google", 141.92, "Technology");
+        Stock meta = new Stock("Meta", 257.34, "Technology");
+        Stock hsbc = new Stock("HSBC", 47.12, "Banking");
+        Stock barclays = new Stock("Barclays", 14.58, "Banking");
+        Stock natwest = new Stock("Natwest", 11.63, "Banking");
+        Stock exxonmobil = new Stock("Exxonmobil", 95.72, "Oil");
+        Stock bp = new Stock("BP", 32.45, "Oil");
+        Stock shell = new Stock("Shell", 67.18, "Oil");
+        Stock pg = new Stock("Procter & Gamble (P&G)", 158.23, "Consumer staples");
+        Stock unilever = new Stock("Unilever", 53.09, "Consumer staples");
+        Stock kelloggs = new Stock("Kellogg's", 70.15, "Consumer staples");
+
+
+// Creating the global events
+        List<Event> eventList = new ArrayList<>();
+
+
+        eventList.add(new Event(
+                "Progress in the development of drug development techniques",
+                "Pharmaceutical Stocks Jump as Industry-Wide Adoption of New Discovery Technique Promises Faster Drug Development",
+                "Any stocks held that are in the Pharmaceutical sector will now experience a rise in price",
+                0.2,
+                "Pharmaceutical",
+                null));
+
+        eventList.add(new Event(
+                "Delay in drug approval",
+                "Pfizer Faces Unexpected Setback as FDA Delays Approval of Promising New Drug. Shares Dip Amid Uncertainty.",
+                "Any Pfizer stocks held will decrease in value as the stock price will fall.",
+                -0.1,
+                null,
+                "Pfizer"));
+
+        eventList.add(new Event(
+                "Natural disaster",
+                "Hurricane Disrupts Gulf Production, Oil Stocks Tumble as Storm Forces Shutdowns and Supply Chain Concerns Rise",
+                "Any stocks held that are in the Oil sector will now experience a fall in price",
+                -0.15,
+                "Oil",
+                null));
+
+        eventList.add(new Event(
+                "Retail boom",
+                "Black Friday Sales Surge Boosts Retail Stocks. Major Chains See Record Online and In-Store Traffic",
+                "Any stocks held that are in the Oil sector will now experience a fall in price",
+                0.08,
+                "Retail",
+                null));
+
+        eventList.add(new Event(
+                "Interest rate hike",
+                "Increase in Interest Rate Lifts Bank Stocks as Investors Bet on Stronger Margins and Higher Profits",
+                "Any stocks held that are in the Banking sector will now experience a rise in price",
+                0.05,
+                "Banking",
+                null));
+
+
+        eventList.add(new Event(
+                "Supply shortage in Tech industry",
+                "Global Semiconductor Shortage Strains Tech Supply Chains, Major Tech Stocks Drop Amid Production Delays",
+                "Any stocks held that are in the Technology sector will now experience a fall in price",
+                -0.15,
+                "Technology",
+                null));
+
+
+        eventList.add(new Event(
+                "Below expected earnings",
+                "Google Shares Fall After Q3 Earnings Miss Expectations and Cloud Growth Slows",
+                "Any stocks held that are in the Pharmaceutical sector will now experience a rise in price",
+                -0.05,
+                null,
+                "Google"));
+
+        // List of sectors
+        List<String> sectorList = new ArrayList<>();
+
+        sectorList.add("Technology");
+        sectorList.add("Healthcare");
+        sectorList.add("Oil");
+        sectorList.add("Retail");
+        sectorList.add("Consumer staples");
+        sectorList.add("Banking");
+
+        // Decimal formatter
+
+        DecimalFormat df = new DecimalFormat("#,###.00");
+
+
+        // Start up scanner for user input
+    Scanner in = new Scanner(System.in);
+
+    System.out.println("Welcome to the stock market simulator!");
+    System.out.println("Today, we will be learning about the concept of diversification. ");
+    System.out.println("So, what is diversification?");
+    System.out.println("Diversification in stock trading refers to the practice of spreading investments across a variety of assets such as different stocks or sectors.");
+    System.out.println("By holding a diverse portfolio (i.e. stocks in multiple companies over multiple sectors), investors minimise the impact of any single investment's \npoor performance on the overall portfolio.");
+    System.out.println("This aims to create more stable returns over time.");
+    System.out.println("Want to see the effects of diversification in action? Then play along!");
+
+
+
+
+    System.out.println("First, let's select which level of diversification you want your portfolio to have:");
+    System.out.println(" 1 - Low diversification portfolio");
+    System.out.println(" 2 - Medium diversification portfolio");
+    System.out.println(" 3 - High diversification portfolio");
+    System.out.println("Type in a number to select:");
+
+    Portfolio selectedPortfolio = null;
+
+    String portfolioChoice = in.nextLine();
+
+    switch (portfolioChoice) {
+        case "1":
+            Portfolio lowDiversificationPortfolio= new Portfolio("Low Diversification Portfolio");
+
+            System.out.println("You have selected the low diversification portfolio");
+            lowDiversificationPortfolio.addStockToPortfolio( microsoft,0.3);
+            lowDiversificationPortfolio.addStockToPortfolio(google, 0.3);
+            lowDiversificationPortfolio.addStockToPortfolio(meta, 0.3);
+            lowDiversificationPortfolio.addStockToPortfolio(bp, 0.1);
+            selectedPortfolio = lowDiversificationPortfolio;
+
+            break;
+
+            case "2":
+                Portfolio mediumDiversificationPortfolio= new Portfolio("Medium Diversification Portfolio");
+
+                System.out.println("You have selected the medium diversification portfolio");
+                mediumDiversificationPortfolio.addStockToPortfolio(microsoft, 0.1);
+                mediumDiversificationPortfolio.addStockToPortfolio(google, 0.1);
+                mediumDiversificationPortfolio.addStockToPortfolio(meta, 0.1);
+                mediumDiversificationPortfolio.addStockToPortfolio(unilever, 0.1);
+                mediumDiversificationPortfolio.addStockToPortfolio(kelloggs, 0.05);
+                mediumDiversificationPortfolio.addStockToPortfolio(costco, 0.05);
+                mediumDiversificationPortfolio.addStockToPortfolio(exxonmobil, 0.2);
+                mediumDiversificationPortfolio.addStockToPortfolio(barclays, 0.05);
+                mediumDiversificationPortfolio.addStockToPortfolio(bp, 0.2);
+                mediumDiversificationPortfolio.addStockToPortfolio(moderna, 0.05);
+                selectedPortfolio = mediumDiversificationPortfolio;
+
+                break;
+
+                case "3":
+                    Portfolio highDiversificationPortfolio= new Portfolio("High Diversification Portfolio");
+
+                    System.out.println("You have selected the high diversification portfolio");
+                    highDiversificationPortfolio.addStockToPortfolio( microsoft, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( google, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( meta, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( unilever, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( kelloggs, 0.1);
+                    highDiversificationPortfolio.addStockToPortfolio( costco, 0.1);
+                    highDiversificationPortfolio.addStockToPortfolio(exxonmobil, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( barclays, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( bp, 0.1);
+                    highDiversificationPortfolio.addStockToPortfolio( moderna, 0.1);
+                    highDiversificationPortfolio.addStockToPortfolio( walmart, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( natwest, 0.1);
+                    highDiversificationPortfolio.addStockToPortfolio( pfizer, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( astrazeneca, 0.05);
+                    highDiversificationPortfolio.addStockToPortfolio( amazon, 0.05);
+                    selectedPortfolio = highDiversificationPortfolio;
+
+                    break;
+        default:
+            System.out.println("Invalid input. Please choose a number between 1 and 3.");
+
+    }
+
+
+
+        System.out.println("\n\nGlobal events can have a significant impact on the stock market.");
+        System.out.println("For example, geopolitical tensions, natural disasters or pandemics create uncertainty, leading to \nmarket declines as investors react to potential risks.");
+        System.out.println("Conversely, positive events such as a breakthrough in technological innovation could boost investor \nconfidence and drive stock prices higher.");
+        System.out.println("Therefore, global events can cause sudden market shifts, with the potential to either negatively or positively affect stock values. Want to see how this happens?");
+
+
+        System.out.println("\nLet's look at the current value of your portfolio: ");
+
+        selectedPortfolio.calculatePortfolioValue();
+        selectedPortfolio.printPortfolio();
+        for(String sector: sectorList){
+            selectedPortfolio.calculateSectorAllocation(sector);
+        }
+
+
+        System.out.println("Now let's see what happens to the value when a global event occurs. Type \"TRIGGER\" to choose a random event or \"EXIT\" to leave the simulator");
+
+        while(true) {
+
+            String selectEvent = in.nextLine();
+
+        if (selectEvent.equals("TRIGGER")) {
+            System.out.println("Global event triggered.");
+
+            // Selecting a random event from list
+
+            Random rand = new Random();
+            Event selectedEvent = eventList.get(rand.nextInt(eventList.size()));
+            String selectedEventName = selectedEvent.getEventName();
+            System.out.println("\nSelected event: " + selectedEventName);
+
+            //Apply the random event to stocks in portfolio
+            selectedPortfolio.triggerEvent(selectedEvent);
+
+            //Calculate new portfolio value
+            selectedPortfolio.calculatePortfolioValue();
+
+            // Show portfolio change
+            if (selectedPortfolio.getPortfolioValue() < 1000000) {
+                System.out.println("\nOverall, your portfolio value has decreased by $" + df.format(1000000 - selectedPortfolio.getPortfolioValue()));
+                System.out.println("Having a significant decrease in portfolio value may be due to lack of diversification. If you hold stocks of several different \nsectors, this may reduce the negative impact of a global event on stock price and thus your portfolio value.");
+            } else if (selectedPortfolio.getPortfolioValue() > 1000000) {
+                System.out.println("\nOverall, your portfolio value has increased by $" + df.format(selectedPortfolio.getPortfolioValue() - 1000000));
+                System.out.println("Although a significant increase in portfolio value may indicate that low diversification increases gains, we need to \nbe mindful that if this event negatively impacted stock prices, then we would see a sharp decrease in portfolio value.");
+            } else {
+                System.out.println("\nYour portfolio value is unchanged");
+                System.out.println("This means you did not hold any stocks that were affected. Another event may have a different outcome.");
+            }
+
+            System.out.println("\nWant to see another event? Type \"TRIGGER\" again to choose a random event. Type \"EXIT\" to leave the simulator");
+
+
+        } else if (selectEvent.equals("EXIT")){
+            System.out.println("Thanks for playing our diversification stock market simulator. Have a great day!");
+            break;
+        } else {
+            System.out.println("Global event not triggered. Try typing \"TRIGGER\" to choose a random event");
+        }
+
+
+
+    }
 
